@@ -10,7 +10,7 @@ struct vocabullary{ //struct for the words of the vocabullery
 struct vocabullary *head = NULL; //first word
 struct vocabullary *currentNode = NULL; //last word
 
-struct vocabullary *find(char key[17], struct vocabullary **previous){ //it finds if there is the key in the vocab
+struct vocabullary *find(char key[100], struct vocabullary **previous){ //it finds if there is the key in the vocab
     struct vocabullary *wordToFind=head; //wordToFind tike the adress of the first word in vocab
     struct vocabullary *temporary=NULL; //its the first word so there is no previous word (temporary get the adress of the prev struct)
     int checker0,checker1,checker2; //its easier for me to dont use strcmp inside of if
@@ -36,7 +36,7 @@ struct vocabullary *find(char key[17], struct vocabullary **previous){ //it find
     }
 }
 
-struct vocabullary *insertFirstWorld(char newHellenicWord[17], char newBarbaricWord[17]){ //creating the List
+struct vocabullary *insertFirstWorld(char newHellenicWord[100], char newBarbaricWord[100]){ //creating the List
     struct vocabullary *newWord; //the first new word
     newWord=(struct vocabullary *)malloc(sizeof(struct vocabullary)); //give the word space (memory)
     if(newWord == NULL){ //no memory given
@@ -50,7 +50,7 @@ struct vocabullary *insertFirstWorld(char newHellenicWord[17], char newBarbaricW
     head = currentNode = newWord; //it is first and last word so both current and head have sanme adress
     return newWord;
 }
-struct vocabullary *insertWorld(char newHellenicWord[17], char newBarbaricWord[17]){
+struct vocabullary *insertWorld(char newHellenicWord[100], char newBarbaricWord[100]){
     if(head==NULL){ //if there is no first word go ton insertFirstWor(l)d and create the list
         return(insertFirstWorld(newHellenicWord,newBarbaricWord));
     }
@@ -70,7 +70,7 @@ struct vocabullary *insertWorld(char newHellenicWord[17], char newBarbaricWord[1
 }
 void fooForInsert(){ //asking what values to insert in the list and checking if there are already in
     struct vocabullary *checker0; //it gets NULL if there is no word like the given one in the vocab
-    char checker1[17],checker2[17]; //gets the word from the keyboard
+    char checker1[100],checker2[100]; //gets the word from the keyboard
     printf("Please give the Hellenic word: ");
     scanf("%s",checker1);
     checker0=find(checker1,NULL); //before calling insert it calls find to check if there is already in list
@@ -93,7 +93,7 @@ void fooForInsert(){ //asking what values to insert in the list and checking if 
 }
 
 void readFromFile(){ //foo that opens the file to read
-    char firstWorld[17],secondWord[17]; //words to insert in the list
+    char firstWorld[100],secondWord[100]; //words to insert in the list
     FILE *fileWithTheVocab; //file to open
     fileWithTheVocab = fopen("datFileIsProgramFile.txt","r"); //open to file
     if(!fileWithTheVocab){ //file is open?
@@ -134,7 +134,7 @@ void writeToFile(){ //you can save your list in the .txt file with this method
     }
 }
 
-int update(char key[17], char newHellenicWord[17], char newBarbaricWord[17]){ //foo for updating word
+int update(char key[100], char newHellenicWord[100], char newBarbaricWord[100]){ //foo for updating word
     struct vocabullary *wordToUpdate;
     wordToUpdate = find(key,NULL); //it takes the andress of the word that find gives
     if (wordToUpdate==NULL){ //if NULL then there is no word in the list like the word key
@@ -145,7 +145,7 @@ int update(char key[17], char newHellenicWord[17], char newBarbaricWord[17]){ //
     return 1;
 }
 void fooForEditWord(){ //foo for getting the words the user want to update
-    char key[17],newHellenicWord[17],newBarbaricWord[17];
+    char key[100],newHellenicWord[100],newBarbaricWord[100];
     int isEverythingOk;
     printf("Please give the word you wish to update: ");
     scanf("%s",key); //the word that the user want to update (can be both greek or english
@@ -171,7 +171,7 @@ void fooForEditWord(){ //foo for getting the words the user want to update
 }
 
 void deleteAword(){ //foo for deleting a word
-    char key[17];
+    char key[100];
     printf("Please give the word you wish to delete: ");
     scanf("%s",key); //the keyword you want to delete from the list
     struct vocabullary *previousWorld = NULL; //the previous word from the word you want to delete
@@ -212,7 +212,7 @@ void printAllWorlds(){ //printing alll the words of the list
     return;
 }
 void printAword(){ //foo for geting the word the user wants to translate
-    char key[17];
+    char key[100];
     printf("Please give the word you wish to translate: ");
     scanf("%s",key);
     struct vocabullary *wordForPrint = head; //get adreess of the first word of the list so as it gets the next and next until it finds the key
